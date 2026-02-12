@@ -220,21 +220,44 @@ gcloud compute instances create vm-onprem --project=$PROJECT_ID --zone=$ZONE --m
 
 ## Documentation
 
-See **VMware_to_GCP_Hybrid_Connectivity_Architecture.docx** for comprehensive 40+ page architecture document including:
-- Executive summary with cost and risk analysis
-- Detailed design decisions and tradeoffs
-- Deep cost analysis across multiple bandwidth scenarios
-- Real-world lessons learned from production deployments
-- Security implications and best practices
-- Disaster recovery and multi-region strategies
-- Complete step-by-step implementation guide
-- LinkedIn thought leadership article
+### Comprehensive Architecture Documentation
+
+This repository includes detailed documentation covering all aspects of VMware to GCP hybrid connectivity:
+
+#### Core Architecture Documents
+
+- **[Executive Summary](docs/executive-summary.md)** - High-level overview, cost summary, risk analysis, and strategic value
+- **[Cost Analysis](docs/cost-analysis.md)** - Deep cost comparison across bandwidth scenarios, TCO analysis, and break-even calculations
+- **[Design Decisions and Tradeoffs](docs/design-decisions.md)** - Detailed rationale for architectural choices and alternatives considered
+
+#### Operational Guides
+
+- **[Real-World Lessons Learned](docs/lessons-learned.md)** - Sanitized production experiences, common pitfalls, and prevention strategies
+- **[Security Best Practices](docs/security-best-practices.md)** - Encryption, network segmentation, IAM, monitoring, and compliance
+- **[Disaster Recovery Strategies](docs/disaster-recovery.md)** - Multi-region architecture, failover procedures, backup strategies, and DR testing
+
+### Quick Reference
+
+| Document | Purpose | Target Audience |
+|----------|---------|-----------------|
+| Executive Summary | Business justification and high-level overview | Executives, Management |
+| Cost Analysis | Financial planning and budgeting | Finance, Engineering Leadership |
+| Design Decisions | Understanding architectural choices | Architects, Senior Engineers |
+| Lessons Learned | Avoiding common mistakes | Implementation Teams |
+| Security Best Practices | Securing hybrid connectivity | Security Teams, Architects |
+| Disaster Recovery | Business continuity planning | Operations, Management |
 
 ## Repository Contents
 ```
 vmware-gcp-hybrid-connectivity/
-├── README.md                                          # This file
-└── VMware_to_GCP_Hybrid_Connectivity_Architecture.docx  # Full architecture doc (10+ pages)
+├── README.md                           # This file
+└── docs/
+    ├── executive-summary.md            # Executive overview and business case
+    ├── cost-analysis.md                # Detailed cost modeling and TCO
+    ├── design-decisions.md             # Architecture decisions and tradeoffs
+    ├── lessons-learned.md              # Real-world deployment experiences
+    ├── security-best-practices.md      # Security implementation guide
+    └── disaster-recovery.md            # DR strategies and procedures
 ```
 
 ## Author
@@ -242,9 +265,10 @@ vmware-gcp-hybrid-connectivity/
 **Gregory B. Horne**
 
 Cloud Infrastructure Architect specializing in:
-- Hybrid cloud
+- Hybrid cloud connectivity
 - VMware vSphere virtualization
 - Google Cloud Platform
+- Large-scale cloud migrations
 
 ## License
 
