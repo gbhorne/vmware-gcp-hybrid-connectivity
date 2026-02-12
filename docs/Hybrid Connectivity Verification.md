@@ -1,173 +1,314 @@
-Hybrid Connectivity Verification
-VMware to GCP High Availability Deployment Validation
-Overview
+\# VMware to GCP Hybrid Connectivity – Deployment Verification
 
-This document validates the successful deployment of a high availability hybrid connectivity architecture between:
 
-On-premises VMware (simulated VPC)
 
-Google Cloud Platform (GCP)
+```text
 
-The deployment uses HA VPN gateways and dynamic BGP routing to ensure enterprise-grade redundancy and automatic failover.
+NETWORK: cloud-vpc
 
-Architecture Components Verified
-Networking
 
-2 Custom VPC Networks
 
-cloud-vpc (10.1.0.0/24)
+╔═══════════════════════════════════════════════════════════════╗
 
-onprem-vpc (10.2.0.0/24)
+║   VMware to GCP Hybrid Connectivity - Deployment Verification ║
 
-2 Regional Subnets
+║   Author: Gregory B. Horne                                    ║
 
-Regional BGP routing mode enabled
+║   Date: February 2026                                         ║
 
-Routing Infrastructure
+╚═══════════════════════════════════════════════════════════════╝
 
-cloud-router (ASN 65001)
 
-onprem-router (ASN 65002)
 
-BGP sessions configured over HA VPN tunnels.
+This script will verify all deployed GCP resources for the
 
-HA VPN Configuration
+VMware to GCP hybrid connectivity architecture.
 
-2 HA VPN Gateways
 
-4 VPN tunnels (full redundancy mesh)
 
-IKEv2 encryption
+============================================================
 
-Verification Results
-VPN Tunnel Health
+1\. PROJECT INFORMATION
 
-Total Tunnels: 4
-Established: 4
+============================================================
 
-Status: PASS
 
-All VPN tunnels are in ESTABLISHED state.
 
-BGP Session Health
+Project ID: playground-s-11-103aa1c1
 
-Cloud Router Sessions: 2/2 UP
-OnPrem Router Sessions: 2/2 UP
-Total BGP Sessions: 4/4 UP
+Region: us-central1
 
-Status: PASS
+Zone: us-central1-a
 
-All BGP peerings are established and exchanging routes.
 
-Route Exchange Validation
 
-Cloud router learned:
+------------------------------------------------------------
 
-10.2.0.0/24
+Project Details
 
-OnPrem router learned:
+------------------------------------------------------------
 
-10.1.0.0/24
+PROJECT\_ID: playground-s-11-103aa1c1
 
-Status: PASS
+NAME: playground-s-11-103aa1c1
 
-Dynamic route propagation confirmed.
+PROJECT\_NUMBER: 824375663456
 
-Firewall Validation
+CREATE\_TIME: 2026-02-12T13:22:51.552229Z
 
-Ingress rules allow:
 
-Internal traffic between subnets
 
-SSH access for testing
+------------------------------------------------------------
 
-Status: PASS
+Enabled APIs (relevant to deployment)
 
-Compute Validation
+------------------------------------------------------------
 
-VMs deployed:
+NAME: projects/824375663456/services/compute.googleapis.com
 
-vm-cloud (10.1.0.2)
 
-vm-onprem (10.2.0.2)
 
-Connectivity:
+============================================================
 
-End-to-end ICMP testing successful.
+2\. VPC NETWORKS
 
-Status: PASS
+============================================================
 
-High Availability Characteristics
 
-This deployment supports:
 
-Active-active tunnels
+------------------------------------------------------------
 
-Automatic BGP failover
+VPC Networks Created
 
-Dynamic route withdrawal
+------------------------------------------------------------
 
-Redundant pathing
+NAME: cloud-vpc
 
-Enterprise-ready hybrid extension pattern
+AUTO\_CREATE\_SUBNETWORKS: False
 
-Failure of a single tunnel does not impact connectivity.
 
-Operational Validation Script
 
-Repository includes:
+NAME: onprem-vpc
 
-gcp-deployment-verification.sh
+AUTO\_CREATE\_SUBNETWORKS: False
 
-This script programmatically validates:
 
-VPN tunnel state
 
-BGP peer health
+✓ 2 VPC networks verified (cloud-vpc, onprem-vpc)
 
-Route learning
 
-Infrastructure presence
 
-Deployment completeness
+============================================================
 
-Final Status
+3\. SUBNETS
 
-All validation checks passed.
+============================================================
 
-Hybrid connectivity is:
 
-Fully deployed
 
-BGP compliant
+------------------------------------------------------------
 
-HA resilient
+Subnets in Region: us-central1
 
-Enterprise-ready
+------------------------------------------------------------
 
-Use Case Alignment
+NAME: cloud-subnet
 
-This architecture pattern is applicable to:
+NETWORK: cloud-vpc
 
-VMware to GCP migrations
+REGION: us-central1
 
-Data center extension
+IP\_RANGE: 10.1.0.0/24
 
-Disaster recovery design
 
-Secure hybrid routing
 
-Multi-cloud strategy
+NAME: onprem-subnet
 
-Conclusion
+NETWORK: onprem-vpc
 
-The hybrid connectivity architecture has been successfully implemented and verified.
+REGION: us-central1
 
-Deployment state:
+IP\_RANGE: 10.2.0.0/24
 
-HA VALIDATED
-BGP 4/4 UP
-Tunnels 4/4 ESTABLISHED
-Route exchange confirmed
 
-Production pattern achieved.
+
+------------------------------------------------------------
+
+IP Address Space Verification
+
+------------------------------------------------------------
+
+&nbsp; Cloud Subnet:   10.1.0.0/24 (Expected: 10.1.0.0/24)
+
+&nbsp; OnPrem Subnet:  10.2.0.0/24 (Expected: 10.2.0.0/24)
+
+✓ IP address ranges match design specifications
+
+
+
+============================================================
+
+4\. CLOUD ROUTERS
+
+============================================================
+
+
+
+------------------------------------------------------------
+
+Cloud Routers
+
+------------------------------------------------------------
+
+NAME: cloud-router
+
+NETWORK: cloud-vpc
+
+REGION: us-central1
+
+ASN: 65001
+
+
+
+NAME: onprem-router
+
+NETWORK: onprem-vpc
+
+REGION: us-central1
+
+ASN: 65002
+
+
+
+✓ BGP ASN configuration correct
+
+
+
+============================================================
+
+5\. HA VPN GATEWAYS
+
+============================================================
+
+
+
+NAME: cloud-vpn-gw
+
+NETWORK: cloud-vpc
+
+REGION: us-central1
+
+
+
+NAME: onprem-vpn-gw
+
+NETWORK: onprem-vpc
+
+REGION: us-central1
+
+
+
+✓ 2 HA VPN Gateways verified
+
+
+
+============================================================
+
+6\. VPN TUNNELS
+
+============================================================
+
+
+
+NAME: tunnel-1 — ESTABLISHED
+
+NAME: tunnel-2 — ESTABLISHED
+
+NAME: tunnel-3 — ESTABLISHED
+
+NAME: tunnel-4 — ESTABLISHED
+
+
+
+✓ All 4 VPN tunnels are ESTABLISHED
+
+
+
+============================================================
+
+7\. BGP SESSIONS
+
+============================================================
+
+
+
+Cloud Router:
+
+STATUS: \['UP', 'UP']
+
+STATE:  \['Established', 'Established']
+
+
+
+OnPrem Router:
+
+STATUS: \['UP', 'UP']
+
+STATE:  \['Established', 'Established']
+
+
+
+✓ All 4 BGP sessions are UP
+
+
+
+============================================================
+
+8\. ROUTE EXCHANGE
+
+============================================================
+
+
+
+✓ Cloud router learning on-prem routes (10.2.0.0/24)
+
+✓ OnPrem router learning cloud routes (10.1.0.0/24)
+
+
+
+============================================================
+
+9\. FIREWALL RULES
+
+============================================================
+
+
+
+cloud-allow-internal
+
+cloud-allow-ssh
+
+onprem-allow-internal
+
+onprem-allow-ssh
+
+
+
+✓ Firewall rules correctly configured
+
+
+
+============================================================
+
+FINAL STATUS
+
+============================================================
+
+
+
+✓ HYBRID CONNECTIVITY VALIDATED — ENTERPRISE HA READY
+
+```
+
+
+
