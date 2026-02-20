@@ -2,19 +2,19 @@
 
 ## Live Deployment - Verified Results
 
-**Status**: Deployed and Validated  
-**Project ID**: playground-s-11-103aa1c1  
-**Region**: us-central1  
+**Status**: Deployed and Validated
+**Project ID**: playground-s-11-103aa1c1
+**Region**: us-central1
 **Deployment Date**: February 2026
 
 ### Deployment Success Metrics
 
-- **4 VPN Tunnels**: All ESTABLISHED  
-- **4 BGP Sessions**: All UP and routing  
-- **Route Exchange**: Automatic propagation working  
-- **End-to-End Connectivity**: Verified with ping tests  
-- **Zero Packet Loss**: 100% reliability  
-- **Low Latency**: 2.7ms average RTT  
+- **4 VPN Tunnels**: All ESTABLISHED
+- **4 BGP Sessions**: All UP and routing
+- **Route Exchange**: Automatic propagation working
+- **End-to-End Connectivity**: Verified with ping tests
+- **Zero Packet Loss**: 100% reliability
+- **Low Latency**: 2.7ms average RTT
 
 ## Architecture Overview
 
@@ -26,26 +26,14 @@ Due to GCP Cloud Sandbox restrictions that prevent direct VMware Engine access, 
 
 - **onprem-vpc (10.2.0.0/24)**: Simulates the on-premises VMware vSphere datacenter environment
 - **vm-onprem (10.2.0.2)**: Represents workloads running on VMware ESXi hosts in the on-premises datacenter
-- **cloud-vpc (10.1.0.0/24)**: Represents the Google Cloud Platform production environment  
+- **cloud-vpc (10.1.0.0/24)**: Represents the Google Cloud Platform production environment
 - **vm-cloud (10.1.0.2)**: Represents cloud-native workloads running in GCP
 
 The VPN tunnels, BGP configuration, routing behavior, and network performance characteristics are **identical to production VMware-to-GCP hybrid deployments**. This simulation demonstrates the complete technical architecture, design decisions, and operational patterns required for enterprise hybrid cloud connectivity.
 
 ### Network Topology
-```
-Cloud VPC (10.1.0.0/24)              On-Prem VPC (10.2.0.0/24)
-        |                                     |
-   vm-cloud (10.1.0.2) <-------------------> vm-onprem (10.2.0.2)
-        |                                     |
-   cloud-router                          onprem-router
-    (ASN 65001) <---------- BGP ----------> (ASN 65002)
-        |                                     |
-   cloud-vpn-gw                          onprem-vpn-gw
-  (Interface 0,1) <====== VPN =======> (Interface 0,1)
-  
-  4 Tunnels (ESTABLISHED)
-  4 BGP Sessions (UP)
-```
+
+![Network Topology](diagrams/network-topology.svg)
 
 ## Components Deployed
 
@@ -251,6 +239,8 @@ This repository includes detailed documentation covering all aspects of VMware t
 ```
 vmware-gcp-hybrid-connectivity/
 ├── README.md                           # This file
+├── diagrams/
+│   └── network-topology.svg            # Architecture diagram
 └── docs/
     ├── executive-summary.md            # Executive overview and business case
     ├── cost-analysis.md                # Detailed cost modeling and TCO
@@ -276,6 +266,6 @@ This project is available for educational and portfolio purposes.
 
 ---
 
-**Status**: Production-Ready Architecture  
-**Last Updated**: February 2026  
+**Status**: Production-Ready Architecture
+**Last Updated**: February 2026
 **Platform**: Google Cloud Platform

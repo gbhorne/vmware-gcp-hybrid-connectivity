@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#4285F4;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="onpremGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#607D8B;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#607D8B;stop-opacity:0.04"/>
+    </linearGradient>
+    <linearGradient id="vpnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#34A853"/>
+      <stop offset="100%" style="stop-color:#0F9D58"/>
+    </linearGradient>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
+    </filter>
+    <filter id="shadowLight" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="720" fill="#FAFBFC" rx="8"/>
+
+  <!-- Title -->
+  <text x="550" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1A1A2E">VMware to GCP Hybrid Connectivity Architecture</text>
+  <text x="550" y="58" text-anchor="middle" font-size="12" fill="#6B7280">HA VPN with BGP Dynamic Routing | us-central1 | February 2026</text>
+
+  <!-- GCP Cloud Zone -->
+  <rect x="40" y="80" width="460" height="540" rx="16" fill="url(#cloudGrad)" stroke="#4285F4" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <rect x="56" y="88" width="140" height="28" rx="14" fill="#4285F4"/>
+  <text x="126" y="107" text-anchor="middle" font-size="12" font-weight="600" fill="white">Google Cloud Platform</text>
+
+  <!-- On-Prem Zone -->
+  <rect x="600" y="80" width="460" height="540" rx="16" fill="url(#onpremGrad)" stroke="#607D8B" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <rect x="616" y="88" width="180" height="28" rx="14" fill="#546E7A"/>
+  <text x="706" y="107" text-anchor="middle" font-size="12" font-weight="600" fill="white">On-Premises (VMware vSphere)</text>
+
+  <!-- Cloud VPC Box -->
+  <rect x="70" y="130" width="400" height="100" rx="10" fill="white" stroke="#D1D5DB" stroke-width="1" filter="url(#shadowLight)"/>
+  <text x="270" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A5F">cloud-vpc</text>
+  <text x="270" y="175" text-anchor="middle" font-size="12" fill="#6B7280">Custom VPC | 10.1.0.0/24</text>
+
+  <!-- Cloud VM -->
+  <rect x="145" y="192" width="250" height="30" rx="6" fill="#E8F0FE" stroke="#4285F4" stroke-width="1"/>
+  <circle cx="165" cy="207" r="8" fill="#4285F4"/>
+  <text x="168" y="211" text-anchor="middle" font-size="9" fill="white" font-weight="700">VM</text>
+  <text x="280" y="212" text-anchor="middle" font-size="11" fill="#1E3A5F" font-weight="600">vm-cloud (10.1.0.2) | e2-micro</text>
+
+  <!-- On-Prem VPC Box -->
+  <rect x="630" y="130" width="400" height="100" rx="10" fill="white" stroke="#D1D5DB" stroke-width="1" filter="url(#shadowLight)"/>
+  <text x="830" y="155" text-anchor="middle" font-size="14" font-weight="700" fill="#37474F">onprem-vpc</text>
+  <text x="830" y="175" text-anchor="middle" font-size="12" fill="#6B7280">Custom VPC | 10.2.0.0/24</text>
+
+  <!-- On-Prem VM -->
+  <rect x="705" y="192" width="250" height="30" rx="6" fill="#ECEFF1" stroke="#607D8B" stroke-width="1"/>
+  <circle cx="725" cy="207" r="8" fill="#607D8B"/>
+  <text x="728" y="211" text-anchor="middle" font-size="9" fill="white" font-weight="700">VM</text>
+  <text x="840" y="212" text-anchor="middle" font-size="11" fill="#37474F" font-weight="600">vm-onprem (10.2.0.2) | e2-micro</text>
+
+  <!-- Cloud Router -->
+  <rect x="120" y="270" width="300" height="90" rx="10" fill="white" stroke="#D1D5DB" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="120" y="270" width="300" height="32" rx="10" fill="#4285F4"/>
+  <rect x="120" y="286" width="300" height="16" fill="#4285F4"/>
+  <text x="270" y="291" text-anchor="middle" font-size="12" font-weight="600" fill="white">cloud-router</text>
+  <text x="270" y="322" text-anchor="middle" font-size="11" fill="#374151">ASN 65001 | BGP Dynamic Routing</text>
+  <text x="270" y="342" text-anchor="middle" font-size="10" fill="#6B7280">169.254.1.1 / 169.254.2.1</text>
+
+  <!-- On-Prem Router -->
+  <rect x="680" y="270" width="300" height="90" rx="10" fill="white" stroke="#D1D5DB" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="680" y="270" width="300" height="32" rx="10" fill="#546E7A"/>
+  <rect x="680" y="286" width="300" height="16" fill="#546E7A"/>
+  <text x="830" y="291" text-anchor="middle" font-size="12" font-weight="600" fill="white">onprem-router</text>
+  <text x="830" y="322" text-anchor="middle" font-size="11" fill="#374151">ASN 65002 | BGP Dynamic Routing</text>
+  <text x="830" y="342" text-anchor="middle" font-size="10" fill="#6B7280">169.254.1.2 / 169.254.2.2</text>
+
+  <!-- Cloud VPN Gateway -->
+  <rect x="120" y="400" width="300" height="80" rx="10" fill="white" stroke="#D1D5DB" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="120" y="400" width="300" height="32" rx="10" fill="#0F9D58"/>
+  <rect x="120" y="416" width="300" height="16" fill="#0F9D58"/>
+  <text x="270" y="421" text-anchor="middle" font-size="12" font-weight="600" fill="white">cloud-vpn-gw</text>
+  <text x="270" y="450" text-anchor="middle" font-size="11" fill="#374151">HA VPN Gateway</text>
+  <text x="270" y="468" text-anchor="middle" font-size="10" fill="#6B7280">Interface 0 + Interface 1</text>
+
+  <!-- On-Prem VPN Gateway -->
+  <rect x="680" y="400" width="300" height="80" rx="10" fill="white" stroke="#D1D5DB" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="680" y="400" width="300" height="32" rx="10" fill="#0F9D58"/>
+  <rect x="680" y="416" width="300" height="16" fill="#0F9D58"/>
+  <text x="830" y="421" text-anchor="middle" font-size="12" font-weight="600" fill="white">onprem-vpn-gw</text>
+  <text x="830" y="450" text-anchor="middle" font-size="11" fill="#374151">HA VPN Gateway</text>
+  <text x="830" y="468" text-anchor="middle" font-size="10" fill="#6B7280">Interface 0 + Interface 1</text>
+
+  <!-- VPN Tunnels -->
+  <rect x="350" y="510" width="400" height="100" rx="12" fill="white" stroke="#34A853" stroke-width="2" filter="url(#shadow)"/>
+  
+  <!-- Tunnel lines -->
+  <line x1="420" y1="440" x2="420" y2="520" stroke="#34A853" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="680" y1="440" x2="680" y2="520" stroke="#34A853" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Tunnel header -->
+  <rect x="350" y="510" width="400" height="30" rx="12" fill="#34A853"/>
+  <rect x="350" y="524" width="400" height="16" fill="#34A853"/>
+  <text x="550" y="531" text-anchor="middle" font-size="12" font-weight="600" fill="white">IPsec VPN Tunnels (IKEv2 | AES-256)</text>
+
+  <!-- Tunnel details -->
+  <text x="440" y="562" text-anchor="middle" font-size="10" fill="#374151" font-weight="600">Tunnel 1</text>
+  <rect x="410" y="566" width="60" height="6" rx="3" fill="#34A853"/>
+  <text x="550" y="562" text-anchor="middle" font-size="10" fill="#374151" font-weight="600">Tunnel 2</text>
+  <rect x="520" y="566" width="60" height="6" rx="3" fill="#34A853"/>
+  <text x="660" y="562" text-anchor="middle" font-size="10" fill="#374151" font-weight="600">Tunnel 3</text>
+  <rect x="630" y="566" width="60" height="6" rx="3" fill="#34A853"/>
+
+  <text x="440" y="590" text-anchor="middle" font-size="10" fill="#374151" font-weight="600">Tunnel 4</text>
+  <rect x="410" y="594" width="60" height="6" rx="3" fill="#34A853"/>
+
+  <!-- Status indicators -->
+  <circle cx="510" cy="590" r="5" fill="#34A853"/>
+  <text x="548" y="594" text-anchor="middle" font-size="10" fill="#374151">4 Tunnels ESTABLISHED</text>
+
+  <circle cx="630" cy="590" r="5" fill="#4285F4"/>
+  <text x="668" y="594" text-anchor="middle" font-size="10" fill="#374151">4 BGP Sessions UP</text>
+
+  <!-- Firewall icons -->
+  <rect x="70" y="510" width="170" height="60" rx="8" fill="white" stroke="#FBBC04" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="155" y="533" text-anchor="middle" font-size="11" font-weight="600" fill="#E37400">Firewall Rules</text>
+  <text x="155" y="550" text-anchor="middle" font-size="9" fill="#6B7280">Internal + SSH</text>
+  <text x="155" y="563" text-anchor="middle" font-size="9" fill="#6B7280">Least Privilege</text>
+
+  <rect x="860" y="510" width="170" height="60" rx="8" fill="white" stroke="#FBBC04" stroke-width="1.5" filter="url(#shadowLight)"/>
+  <text x="945" y="533" text-anchor="middle" font-size="11" font-weight="600" fill="#E37400">Firewall Rules</text>
+  <text x="945" y="550" text-anchor="middle" font-size="9" fill="#6B7280">Internal + SSH</text>
+  <text x="945" y="563" text-anchor="middle" font-size="9" fill="#6B7280">Least Privilege</text>
+
+  <!-- Connection lines: VPC to Router -->
+  <line x1="270" y1="230" x2="270" y2="270" stroke="#4285F4" stroke-width="2"/>
+  <line x1="830" y1="230" x2="830" y2="270" stroke="#607D8B" stroke-width="2"/>
+
+  <!-- Connection lines: Router to VPN GW -->
+  <line x1="270" y1="360" x2="270" y2="400" stroke="#4285F4" stroke-width="2"/>
+  <line x1="830" y1="360" x2="830" y2="400" stroke="#607D8B" stroke-width="2"/>
+
+  <!-- Status Banner -->
+  <rect x="200" y="640" width="700" height="52" rx="10" fill="white" stroke="#34A853" stroke-width="1.5" filter="url(#shadow)"/>
+  
+  <circle cx="260" cy="662" r="6" fill="#34A853"/>
+  <text x="275" y="667" font-size="11" fill="#374151" font-weight="600">0% Packet Loss</text>
+  
+  <circle cx="430" cy="662" r="6" fill="#34A853"/>
+  <text x="445" y="667" font-size="11" fill="#374151" font-weight="600">2.7ms Avg RTT</text>
+
+  <circle cx="590" cy="662" r="6" fill="#34A853"/>
+  <text x="605" y="667" font-size="11" fill="#374151" font-weight="600">99.99% SLA</text>
+
+  <circle cx="740" cy="662" r="6" fill="#34A853"/>
+  <text x="755" y="667" font-size="11" fill="#374151" font-weight="600">IKEv2 + AES-256</text>
+</svg>
